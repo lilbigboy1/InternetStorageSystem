@@ -1,3 +1,14 @@
+/*
+ * server.java
+ * CIS4930 - Internet Storage Systems, Spring 2026
+ * PA1: Capital Converter
+ *
+ * A TCP server that listens on a specified port, accepts a client
+ * connection, and converts alphabetic strings to uppercase. Returns
+ * an error message for non-alphabet inputs and handles graceful
+ * termination when the client sends "bye"
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -47,9 +58,10 @@ public class server {
                         out.println(DISCONNECT_RESPONSE);
                         break;
                     }
-
-                    if (!isAllLowercaseLetters(inputLine)) {
-                        out.println(ERROR_PREFIX + " input must contain only lowercase letters a-z. Please retransmit.");
+                    
+                    //fixed for A-Z as well
+                    if (!isAllAlphabets(inputLine)) {
+                        out.println(ERROR_PREFIX + " input must contain only alphabets (a-z, A-Z). Please retransmit.");
                         continue;
                     }
 
@@ -66,13 +78,15 @@ public class server {
         }
     }
 
-    private static boolean isAllLowercaseLetters(String s) {
+    //check upper and lower case alphabets
+    private static boolean isAllAlphabets(String s) {
         if (s == null || s.isEmpty()) {
             return false;
         }
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c < 'a' || c > 'z') {
+            //inclusive alphabet params
+            if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
                 return false;
             }
         }

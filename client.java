@@ -1,3 +1,14 @@
+/*
+ * client.java
+ * CIS4930 - Internet Storage Systems, Spring 2026
+ * PA1: Capital Converter
+ *
+ * A TCP client that connects to the Capital Converter server,
+ * sends user-input strings, receives capitalized responses, and
+ * measures round-trip time (RTT) in milliseconds. Prints RTT
+ * statistics (min, mean, max, std dev) upon termination
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,7 +56,7 @@ public class client {
             List<Double> rtts = new ArrayList<>();
 
             while (true) {
-                System.out.print("Enter a lowercase string (or 'bye' to quit): ");
+                System.out.print("Enter an alphabet string (or 'bye' to quit): ");
                 String userInput = scanner.nextLine();
 
                 long startTime = System.nanoTime();
